@@ -1,0 +1,11 @@
+#!/bin/bash
+#PBS -N mnist_tsne_exact
+#PBS -l select=1:ncpus=4:mem=30gb
+#PBS -l walltime=08:00:00
+#PBS -m ae
+
+cd $PBS_O_WORKDIR
+
+PYTHON_BIN="/storage/brno2/home/matyztul/envs/mvd_2026/bin/python"
+
+$PYTHON_BIN run_tsne.py

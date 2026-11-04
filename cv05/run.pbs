@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -N wikipedia_search
+#PBS -l select=1:ncpus=4:ngpus=1:gpu_mem=12gb:mem=32gb:scratch_local=40gb
+#PBS -l walltime=03:00:00
+#PBS -q gpu
+
+# 1. Přesměrování cache Hugging Face a dočasných souborů na rychlý Scratch disk
+export HF_HOME="$SCRATCHDIR/hf_cache"
+export TMPDIR="$SCRATCHDIR"
+
+# 2. Přechod do pracovní složky
+cd /storage/brno2/home/$USER/MVD-2026-Matyska/cv05
+
+# 3. Načtení modulu a aktivace trvalého prostředí z Home
+module add mambaforge
+mamba activate /storage/brno2/home/$USER/envs/mvd_env
+
+echo "=== 1. Krok: Generování a uložení vektorů na GPU ==="
+python generate_embeddings.py
+
+echo "=== 2. Krok: Spuštění vyhledávání ==="
+python cv05.py
+
+echo "=== Vše je hotovo! ==="

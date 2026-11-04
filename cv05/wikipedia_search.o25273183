@@ -1,0 +1,33 @@
+=== 1. Krok: Generování a uložení vektorů na GPU ===
+🚀 Použité zařízení pro model: CUDA
+   GPU: NVIDIA L40S
+1. Načítám Wikipedii...
+2. Načítám model a přesouvám ho na GPU...
+3. Generuji vektory pro všechny články (běží na GPU)...
+4. Ukládám vektory do souboru wiki_embeddings.npy...
+HOTOVO! Soubor wiki_embeddings.npy byl úspěšně vytvořen.
+=== 2. Krok: Spuštění vyhledávání ===
+✅ GPU Nalezeno: NVIDIA L40S
+🚀 Používaná architektura (Compute Capability): sm_89 (CUDA verze: 12.1)
+
+--- Výsledky pro dotaz: 'how do plants make food from sunlight' ---
+Skóre: 0.5773 | Název článku: Sunlight
+Skóre: 0.5460 | Název článku: Light-dependent reaction
+Skóre: 0.5455 | Název článku: Plant
+Skóre: 0.5448 | Název článku: Photosynthesis
+Skóre: 0.5405 | Název článku: Solar energy
+
+--- Výsledky pro dotaz: 'largest animal that ever lived' ---
+Skóre: 0.6252 | Název článku: Largest extinct animals
+Skóre: 0.6127 | Název článku: Gigantopithecus
+Skóre: 0.5932 | Název článku: Largest Artiodactyls
+Skóre: 0.5774 | Název článku: Colossal squid
+Skóre: 0.5637 | Název článku: Gigantophis
+
+--- Výsledky pro dotaz: 'coursera vs udacity machine learning' ---
+Skóre: 0.4565 | Název článku: Learning by teaching
+Skóre: 0.4451 | Název článku: Udemy
+Skóre: 0.4293 | Název článku: Computer assisted language learning
+Skóre: 0.3862 | Název článku: Tutor
+Skóre: 0.3860 | Název článku: Kanda University of International Studies
+=== Vše je hotovo! ===

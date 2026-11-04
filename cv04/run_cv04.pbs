@@ -1,0 +1,41 @@
+#!/bin/bash
+#PBS -N cv04_wikipedia
+#PBS -l select=1:ncpus=16:mem=64gb:scratch_local=30gb
+#PBS -l walltime=02:00:00
+#PBS -q default@pbs-m1.metacentrum.cz
+#PBS -m ae
+
+# 1. Přeneseme se do lokálního scratch disku (výpočty poběží tam, je to mnohem rychlejší než domovský disk)
+cd $SCRATCHDIR
+
+# Načtení potřebných modulů
+module purge
+module add metabase/1
+module add mambaforge
+
+# Nastavení prostředí na scratchi
+ENV_DIR="$SCRATCHDIR/cv04_env"
+export TMPDIR=$SCRATCHDIR
+export PIP_CACHE_DIR=$SCRATCHDIR/pip_cache
+
+# Vytvoření a aktivace conda prostředí
+mamba create --prefix $ENV_DIR python=3.10 -y
+eval "$(conda shell.bash hook)"
+conda activate $ENV_DIR
+
+# Instalace potřebných knihoven
+pip install --upgrade pip
+pip install pandas datasets spacy
+
+# Stažení odpovídajícího spaCy modelu
+python -m spacy download en_core_web_sm
+
+# Zkopírování vašeho python skriptu ze 
+cp $PBS_O_WORKDIR/vytvor_index.py .
+
+# Spuštění python skriptu (teď už naplno využije 16 jader)
+python vytvor_index.py
+
+# Zkopírování výsledných indexů zpět do vašeho domovského adresáře
+cp index_title.pkl /storage/brno2/home/$USER/MVD-2026-Matyska/cv04/
+cp index_text.pkl /storage/brno2/home/$USER/MVD-2026-Matyska/cv04/

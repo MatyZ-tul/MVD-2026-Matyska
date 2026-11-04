@@ -1,0 +1,20 @@
+# Large data, indices, and pickle files from all exercises
+*.pkl
+*.pk
+cv03/text8
+cv03/vectors_skipgram.txt
+cv04/index_text.pkl
+
+# Specific large dataset files
+cv05/glove.6B.50d.txt
+cv05/wiki_embeddings.npy
+cv06/curlie_cs.jsonl.gz
+
+# General ignored system & python files
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Numpy arrays and data directories
+*.npy
+data/

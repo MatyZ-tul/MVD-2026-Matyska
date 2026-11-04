@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -N test_cuda_job
+#PBS -l select=1:ncpus=2:ngpus=1:gpu_mem=6gb:mem=8gb:scratch_local=10gb
+#PBS -l walltime=00:10:00
+#PBS -q gpu
+
+# Přechod do složky, kde máte uložený testovací skript (upravte si cestu podle sebe)
+cd /storage/brno2/home/$USER/MVD-2026-Matyska/cv05
+
+# Načtení potřebného modulu a aktivace vašeho prostředí z Home
+module add mambaforge
+mamba activate /storage/brno2/home/$USER/envs/mvd_env
+
+echo "=== Spouštím testovací skript v alokované GPU úloze ==="
+python test_cuda.py
